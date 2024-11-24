@@ -1,0 +1,511 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: url('./images/minions.gif') center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    min-height: 100vh;
+    backdrop-filter: blur(3px);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.calendar-section {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 600px;
+    backdrop-filter: blur(3px);
+}
+
+.organizer-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.notes-section, .grocery-section, .todo-section {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    backdrop-filter: blur(3px);
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.grocery-input, .todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+button {
+    padding: 8px 16px;
+    background: rgba(0, 123, 255, 0.8);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: rgba(0, 123, 255, 0.9);
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#calendar {
+    height: 100%;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    background: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.list-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.checkbox-bubble {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.checkbox-bubble.checked {
+    background-color: #007bff;
+    position: relative;
+}
+
+.checkbox-bubble.checked::after {
+    content: '✓';
+    color: white;
+    font-size: 12px;
+}
+
+.item-text {
+    flex-grow: 1;
+}
+
+.item-text.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.delete-btn {
+    padding: 4px 8px;
+    background: rgba(220, 53, 69, 0.8);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: rgba(220, 53, 69, 0.9);
+}
+
+.todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.reminder-badge {
+    font-size: 0.8em;
+    background: #007bff;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+.reminder-controls {
+    display: flex;
+    gap: 5px;
+}
+
+/* Style for the Flatpickr calendar */
+.flatpickr-calendar {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* Add these styles for the recurrence modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+}
+
+.recurrence-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recurrence-type {
+    display: flex;
+    gap: 20px;
+}
+
+.weekly-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recur-every input[type="number"] {
+    width: 50px;
+    padding: 4px;
+    margin: 0 5px;
+}
+
+.weekday-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#recurrence-btn {
+    background: #28a745;
+}
+
+.reminder-badge.recurring {
+    background: #28a745;
+}
+
+/* Add styles for recurring events */
+.fc-event.recurring {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.fc-event.recurring .fc-event-main {
+    position: relative;
+}
+
+.fc-event.recurring .fc-event-main::after {
+    content: "🔄";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Add these styles for the event modal */
+.event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#recurrence-options {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+    background: #007bff;
+    color: white;
+}
+
+.modal-buttons button:last-child {
+    background: #6c757d;
+    color: white;
+}
+
+/* Calendar specific styles */
+.fc {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.fc-theme-standard td, 
+.fc-theme-standard th {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.fc-day-today {
+    background: rgba(225, 225, 225, 0.5) !important;
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+/* Calendar header */
+.fc-toolbar {
+    background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.fc-toolbar-title {
+    color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Calendar events */
+.fc-event {
+    background: rgba(0, 123, 255, 0.6) !important;
+    border: none !important;
+}
+
+.fc-event.recurring {
+    background: rgba(40, 167, 69, 0.6) !important;
+}
+
+/* Calendar header buttons */
+.fc-button-primary {
+    background-color: rgba(0, 123, 255, 0.6) !important;
+    border-color: rgba(0, 123, 255, 0.4) !important;
+}
+
+.fc-button-primary:hover {
+    background-color: rgba(0, 123, 255, 0.8) !important;
+    border-color: rgba(0, 123, 255, 0.6) !important;
+}
+
+/* Event hover state */
+.fc-event:hover {
+    background: rgba(0, 123, 255, 0.8) !important;
+}
+
+.fc-event.recurring:hover {
+    background: rgba(40, 167, 69, 0.8) !important;
+}
+
+/* Calendar cell hover */
+.fc-day:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Add these styles for the edit and delete modals */
+.edit-options, .delete-options-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.edit-options button, .delete-options-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: rgba(0, 123, 255, 0.6);
+    color: white;
+}
+
+.delete-options-buttons button:first-child {
+    background: rgba(220, 53, 69, 0.6);
+}
+
+.delete-options-buttons button:nth-child(2) {
+    background: rgba(220, 53, 69, 0.8);
+}
+
+.delete-options-buttons button:last-child {
+    background: rgba(108, 117, 125, 0.6);
+}
+
+#recurring-event-options {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+/* Option 1: Futuristic style */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 10px rgba(0, 123, 255, 0.7),
+                 0 0 20px rgba(0, 123, 255, 0.5);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* Option 2: Modern bold style */
+h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 3.2em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Option 3: Tech style */
+h1 {
+    font-family: 'Audiowide', cursive;
+    font-size: 3em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
+    letter-spacing: 3px;
+}
+
+/* Option 4: Strong modern style */
+h1 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 3.2em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+}
+
+/* Add this hover effect to any of the above options */
+h1:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+    text-shadow: 0 0 20px rgba(0, 123, 255, 0.9);
+}
+
+/* iPad optimizations */
+@supports (-webkit-touch-callout: none) {
+    /* Prevent rubber-band scrolling */
+    html, body {
+        position: fixed;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .container {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+    }
+    
+    /* Prevent text selection */
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+    }
+    
+    /* Allow text selection in input fields */
+    input, textarea {
+        -webkit-user-select: text;
+    }
+}
+
+/* Larger touch targets for iPad */
+button, .checkbox-bubble {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Adjust calendar for touch */
+.fc .fc-button {
+    padding: 8px 16px;
+    font-size: 16px;
+}
+
+.fc td, .fc th {
+    padding: 8px;
+}
+  

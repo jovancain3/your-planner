@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Personal Planner">
+    <title>Personal Planner</title>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.10/index.global.min.js'></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <!--link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" -->
+    <!--link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet" -->
+    <!--link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" -->
+    <link rel="apple-touch-icon" href="images/icon-152.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="images/icon-167.png">
+    <link rel="apple-touch-startup-image" href="images/splash.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Jovan + Cyd</h1>
+        </header>
+
+        <div class="calendar-section">
+            <div id="calendar"></div>
+        </div>
+
+        <div class="organizer-section">
+            <div class="notes-section">
+                <h2>Notes</h2>
+                <textarea id="notes" placeholder="Write your notes here..."></textarea>
+            </div>
+
+            <div class="grocery-section">
+                <h2>Grocery List</h2>
+                <div class="grocery-input">
+                    <input type="text" id="grocery-item" placeholder="Add item...">
+                    <button onclick="addGroceryItem()">Add</button>
+                </div>
+                <ul id="grocery-list"></ul>
+            </div>
+
+            <div class="todo-section">
+                <h2>Todo List</h2>
+                <div class="todo-input">
+                    <input type="text" id="todo-item" placeholder="Add task...">
+                    <input type="text" id="todo-reminder" placeholder="Set reminder">
+                    <button id="recurrence-btn">🔄 Recurring</button>
+                    <button onclick="addTodoItem()">Add</button>
+                </div>
+                
+                <div id="recurrence-modal" class="modal">
+                    <div class="modal-content">
+                        <h3>Recurrence pattern</h3>
+                        <div class="recurrence-options">
+                            <div class="recurrence-type">
+                                <label><input type="radio" name="recurrence" value="daily"> Daily</label>
+                                <label><input type="radio" name="recurrence" value="weekly" checked> Weekly</label>
+                                <label><input type="radio" name="recurrence" value="monthly"> Monthly</label>
+                                <label><input type="radio" name="recurrence" value="yearly"> Yearly</label>
+                            </div>
+                            
+                            <div class="weekly-options">
+                                <div class="recur-every">
+                                    Recur every <input type="number" id="recur-weeks" value="1" min="1"> week(s) on:
+                                </div>
+                                <div class="weekday-selector">
+                                    <label><input type="checkbox" value="Sunday"> Sunday</label>
+                                    <label><input type="checkbox" value="Monday"> Monday</label>
+                                    <label><input type="checkbox" value="Tuesday"> Tuesday</label>
+                                    <label><input type="checkbox" value="Wednesday"> Wednesday</label>
+                                    <label><input type="checkbox" value="Thursday"> Thursday</label>
+                                    <label><input type="checkbox" value="Friday"> Friday</label>
+                                    <label><input type="checkbox" value="Saturday"> Saturday</label>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-buttons">
+                                <button onclick="saveRecurrence()">Save</button>
+                                <button onclick="closeRecurrenceModal()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul id="todo-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <h3>Create Event</h3>
+            <div class="event-form">
+                <div class="form-group">
+                    <label for="event-title">Event Title:</label>
+                    <input type="text" id="event-title" placeholder="Enter event title">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="is-recurring"> Make this event recurring
+                    </label>
+                </div>
+                
+                <div id="recurrence-options" style="display: none;">
+                    <div class="recurrence-type">
+                        <label><input type="radio" name="recurrence" value="daily"> Daily</label>
+                        <label><input type="radio" name="recurrence" value="weekly" checked> Weekly</label>
+                        <label><input type="radio" name="recurrence" value="monthly"> Monthly</label>
+                        <label><input type="radio" name="recurrence" value="yearly"> Yearly</label>
+                    </div>
+                    
+                    <div class="weekly-options">
+                        <div class="recur-every">
+                            Recur every <input type="number" id="recur-weeks" value="1" min="1"> week(s) on:
+                        </div>
+                        <div class="weekday-selector">
+                            <label><input type="checkbox" value="Sunday"> Sunday</label>
+                            <label><input type="checkbox" value="Monday"> Monday</label>
+                            <label><input type="checkbox" value="Tuesday"> Tuesday</label>
+                            <label><input type="checkbox" value="Wednesday"> Wednesday</label>
+                            <label><input type="checkbox" value="Thursday"> Thursday</label>
+                            <label><input type="checkbox" value="Friday"> Friday</label>
+                            <label><input type="checkbox" value="Saturday"> Saturday</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button onclick="saveEvent()">Save</button>
+                    <button onclick="closeEventModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="event-edit-modal" class="modal">
+        <div class="modal-content">
+            <h3>Edit Event</h3>
+            <div class="event-form">
+                <div class="form-group">
+                    <label for="edit-event-title">Event Title:</label>
+                    <input type="text" id="edit-event-title" placeholder="Enter event title">
+                </div>
+                
+                <div id="recurring-event-options">
+                    <h4>Recurring Event Options</h4>
+                    <div class="edit-options">
+                        <button onclick="editThisOccurrence()">Edit This Occurrence</button>
+                        <button onclick="editAllOccurrences()">Edit All Occurrences</button>
+                    </div>
+                </div>
+                
+                <div class="delete-options">
+                    <button class="delete-btn" onclick="showDeleteOptions()">Delete</button>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button onclick="saveEventEdit()">Save</button>
+                    <button onclick="closeEventEditModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-options-modal" class="modal">
+        <div class="modal-content">
+            <h3>Delete Event</h3>
+            <div class="delete-options-buttons">
+                <button onclick="deleteThisOccurrence()">Delete This Occurrence</button>
+                <button onclick="deleteAllOccurrences()">Delete All Occurrences</button>
+                <button onclick="closeDeleteModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
