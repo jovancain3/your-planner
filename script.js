@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
         selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
+        longPressDelay: 100,
+        eventLongPressDelay: 100,
+        selectLongPressDelay: 100,
         
         select: function(info) {
             selectedStartDate = info.start;

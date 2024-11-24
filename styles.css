@@ -508,4 +508,41 @@ button, .checkbox-bubble {
 .fc td, .fc th {
     padding: 8px;
 }
+
+/* Add these CSS rules for better touch interaction */
+@media (pointer: coarse) {
+    /* Larger touch targets */
+    .list-item, button, .checkbox-bubble {
+        min-height: 44px;
+        padding: 12px;
+    }
+    
+    /* Prevent text selection on touch */
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Allow text selection in inputs */
+    input, textarea {
+        -webkit-user-select: text;
+        user-select: text;
+    }
+    
+    /* Better scrolling */
+    .container {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Larger calendar elements */
+    .fc .fc-button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    
+    .fc td, .fc th {
+        padding: 8px;
+    }
+}
   
