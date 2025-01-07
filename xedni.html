@@ -44,7 +44,6 @@
                 <div class="grocery-input">
                     <input type="text" id="grocery-item" placeholder="Add item...">
                     <button onclick="addGroceryItem()">Add</button>
-                    <button onclick="clearGroceryList()" class="clear-btn">Clear</button>
                 </div>
                 <ul id="grocery-list"></ul>
             </div>
@@ -53,10 +52,45 @@
                 <h2>Todo List</h2>
                 <div class="todo-input">
                     <input type="text" id="todo-item" placeholder="Add task...">
-                    <button onclick="showReminderModal()" class="reminder-setup-btn">Set Reminder</button>
+                    <input type="text" id="todo-reminder" placeholder="Set reminder">
+                    <button id="recurrence-btn">🔄 Recurring</button>
                     <button onclick="addTodoItem()">Add</button>
-                    <button onclick="clearTodoList()" class="clear-btn">Clear</button>
                 </div>
+                
+                <div id="recurrence-modal" class="modal">
+                    <div class="modal-content">
+                        <h3>Recurrence pattern</h3>
+                        <div class="recurrence-options">
+                            <div class="recurrence-type">
+                                <label><input type="radio" name="recurrence" value="daily"> Daily</label>
+                                <label><input type="radio" name="recurrence" value="weekly" checked> Weekly</label>
+                                <label><input type="radio" name="recurrence" value="monthly"> Monthly</label>
+                                <label><input type="radio" name="recurrence" value="yearly"> Yearly</label>
+                            </div>
+                            
+                            <div class="weekly-options">
+                                <div class="recur-every">
+                                    Recur every <input type="number" id="recur-weeks" value="1" min="1"> week(s) on:
+                                </div>
+                                <div class="weekday-selector">
+                                    <label><input type="checkbox" value="Sunday"> Sunday</label>
+                                    <label><input type="checkbox" value="Monday"> Monday</label>
+                                    <label><input type="checkbox" value="Tuesday"> Tuesday</label>
+                                    <label><input type="checkbox" value="Wednesday"> Wednesday</label>
+                                    <label><input type="checkbox" value="Thursday"> Thursday</label>
+                                    <label><input type="checkbox" value="Friday"> Friday</label>
+                                    <label><input type="checkbox" value="Saturday"> Saturday</label>
+                                </div>
+                            </div>
+                            
+                            <div class="modal-buttons">
+                                <button onclick="saveRecurrence()">Save</button>
+                                <button onclick="closeRecurrenceModal()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <ul id="todo-list"></ul>
             </div>
         </div>
@@ -97,21 +131,6 @@
                             <label><input type="checkbox" value="Friday"> Friday</label>
                             <label><input type="checkbox" value="Saturday"> Saturday</label>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="recurrence-end">
-                    <h4>End Recurrence</h4>
-                    <div class="end-option">
-                        <input type="radio" name="end-type" id="end-after" value="after">
-                        <label for="end-after">After</label>
-                        <input type="number" id="occurrence-count" min="1" value="1">
-                        <span>occurrences</span>
-                    </div>
-                    <div class="end-option">
-                        <input type="radio" name="end-type" id="end-on" value="on">
-                        <label for="end-on">On date</label>
-                        <input type="date" id="end-date">
                     </div>
                 </div>
                 
@@ -156,64 +175,8 @@
             <h3>Delete Event</h3>
             <div class="delete-options-buttons">
                 <button onclick="deleteThisOccurrence()">Delete This Occurrence</button>
-                <!-- <button onclick="deleteAllOccurrences()">Delete All Occurrences</button> -->
+                <button onclick="deleteAllOccurrences()">Delete All Occurrences</button>
                 <button onclick="closeDeleteModal()">Cancel</button>
-            </div>
-        </div>
-    </div>
-    <div id="reminder-modal" class="modal">
-        <div class="modal-content">
-            <h3>Set Reminder</h3>
-            <div class="reminder-form">
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="reminder-is-recurring"> Make this reminder recurring
-                    </label>
-                </div>
-                
-                <div id="reminder-recurrence-options" style="display: none;">
-                    <div class="recurrence-type">
-                        <label><input type="radio" name="reminder-recurrence" value="daily"> Daily</label>
-                        <label><input type="radio" name="reminder-recurrence" value="weekly" checked> Weekly</label>
-                        <label><input type="radio" name="reminder-recurrence" value="monthly"> Monthly</label>
-                        <label><input type="radio" name="reminder-recurrence" value="yearly"> Yearly</label>
-                    </div>
-                    
-                    <div class="weekly-options">
-                        <div class="recur-every">
-                            Recur every <input type="number" id="reminder-recur-weeks" value="1" min="1"> week(s) on:
-                        </div>
-                        <div class="weekday-selector">
-                            <label><input type="checkbox" value="Sunday"> Sunday</label>
-                            <label><input type="checkbox" value="Monday"> Monday</label>
-                            <label><input type="checkbox" value="Tuesday"> Tuesday</label>
-                            <label><input type="checkbox" value="Wednesday"> Wednesday</label>
-                            <label><input type="checkbox" value="Thursday"> Thursday</label>
-                            <label><input type="checkbox" value="Friday"> Friday</label>
-                            <label><input type="checkbox" value="Saturday"> Saturday</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="recurrence-end">
-                    <h4>End Recurrence</h4>
-                    <div class="end-option">
-                        <input type="radio" name="end-type" id="end-after" value="after">
-                        <label for="end-after">After</label>
-                        <input type="number" id="occurrence-count" min="1" value="1">
-                        <span>occurrences</span>
-                    </div>
-                    <div class="end-option">
-                        <input type="radio" name="end-type" id="end-on" value="on">
-                        <label for="end-on">On date</label>
-                        <input type="date" id="end-date">
-                    </div>
-                </div>
-                
-                <div class="modal-buttons">
-                    <button onclick="saveReminder()">Save</button>
-                    <button onclick="closeReminderModal()">Cancel</button>
-                </div>
             </div>
         </div>
     </div>

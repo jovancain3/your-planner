@@ -27,6 +27,17 @@ header {
     margin-bottom: 30px;
 }
 
+/* Add styles for the reminder setup button */
+.reminder-setup-btn {
+    background: #3498db !important;  /* Match your light blue color */
+    padding: 8px 16px !important;
+    white-space: nowrap;
+}
+
+.reminder-setup-btn.has-reminder {
+    background: #2ecc71 !important;  /* Green to indicate active reminder */
+}
+
 .calendar-section {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
@@ -77,7 +88,7 @@ input[type="text"] {
 
 button {
     padding: 8px 16px;
-    background: rgba(0, 123, 255, 0.8);
+    background: #3498db;
     color: white;
     border: none;
     border-radius: 4px;
@@ -86,7 +97,7 @@ button {
 }
 
 button:hover {
-    background: rgba(0, 123, 255, 0.9);
+    background: #2980b9;
 }
 
 ul {
@@ -508,4 +519,266 @@ button, .checkbox-bubble {
 .fc td, .fc th {
     padding: 8px;
 }
+
+/* Add or verify these styles */
+.grocery-section, .todo-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.grocery-input, .todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#grocery-list, #todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+#grocery-list li, #todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin: 5px 0;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+}
+
+button {
+    padding: 8px 16px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2980b9;
+}
+
+/* Add these styles */
+#grocery-list li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    margin: 5px 0;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.grocery-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3498db;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.grocery-checkbox:checked {
+    background-color: #3498db;
+}
+
+.grocery-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#grocery-list span {
+    flex: 1;
+}
+
+/* Add style for the Clear button */
+.clear-btn {
+    background: #ff4444 !important;
+}
+
+.clear-btn:hover {
+    background: #cc0000 !important;
+}
+
+/* Add this new style for the delete button */
+.delete-item {
+    background: none !important;
+    color: #ff4444 !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    cursor: pointer;
+    width: 20px !important;
+    height: 20px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto !important;
+}
+
+.delete-item:hover {
+    color: #cc0000 !important;
+}
+
+.reminder-btn {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    cursor: pointer;
+    width: 20px !important;
+    height: 20px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px !important;
+}
+
+.reminder-btn:hover {
+    opacity: 0.7;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ... existing code ... */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.edit-buttons,
+.delete-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.button-group button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-this-occurrence,
+.save-all-occurrences {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* .delete-this-occurrence,
+.delete-all-occurrences {
+    background-color: #f44336;
+    color: white;
+}
+
+.save-this-occurrence:hover,
+.save-all-occurrences:hover {
+    background-color: #45a049;
+} */
+
+/* .delete-this-occurrence:hover,
+.delete-all-occurrences:hover {
+    background-color: #da190b;
+} */
+
+/* Make delete all occurrences more prominent */
+/* .delete-all-occurrences {
+    background-color: #d32f2f;
+}
+
+.delete-all-occurrences:hover {
+    background-color: #b71c1c;
+} */
+
+/* Copy the relevant styles from your existing calendar modal styles */
+
+/* ... existing code ... */
+
+/* Add these new styles for recurrence end options */
+.recurrence-end {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Show recurrence end options only when recurring checkbox is checked */
+#recurrence-options:has(input[name="recurring"]:checked) .recurrence-end {
+    display: flex;
+}
+
+.end-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.end-option input[type="number"],
+.end-option input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.end-option input[type="number"] {
+    width: 80px;
+}
+
+.end-option input[type="date"] {
+    width: 150px;
+}
+
+.end-option input[type="radio"] {
+    margin: 0;
+}
+
+/* Disable input fields when their radio button isn't selected */
+.end-option:not(:has(input[type="radio"]:checked)) input:not([type="radio"]) {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ... rest of existing code ... */
   
