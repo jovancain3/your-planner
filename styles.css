@@ -780,5 +780,21 @@ button:hover {
     pointer-events: none;
 }
 
+/* Add these styles for the clear calendar button */
+.clear-calendar-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 30px auto;
+    display: block;
+    width: fit-content;
+}
+.clear-calendar-btn:hover {
+    background-color: #c82333;
+}
+
 /* ... rest of existing code ... */
   

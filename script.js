@@ -171,6 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
             addTodoItem();
         }
     });
+
+    addClearCalendarButton();
 });
 
 function showEventModal() {
@@ -746,4 +748,22 @@ function handleEventSubmit(event) {
 document.getElementById('recurring').addEventListener('change', function() {
     const recurrenceOptions = document.getElementById('reminder-recurrence-options');
     recurrenceOptions.style.display = this.checked ? 'block' : 'none';
-}); 
+});
+
+// Add this after your calendar initialization
+function addClearCalendarButton() {
+    const clearButton = document.createElement('button');
+    clearButton.className = 'clear-calendar-btn';
+    clearButton.textContent = 'Clear Calendar';
+    
+    clearButton.addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear all events from the calendar?')) {
+            const allEvents = calendar.getEvents();
+            allEvents.forEach(event => event.remove());
+        }
+    });
+    
+    // Add button at the end of the container
+    const container = document.querySelector('.container');
+    container.appendChild(clearButton);
+} 
